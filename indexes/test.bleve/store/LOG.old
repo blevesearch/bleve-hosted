@@ -1,0 +1,10 @@
+=============== Jul 6, 2015 (EDT) ===============
+18:17:18.107280 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+18:17:18.109131 db@open opening
+18:17:18.109232 journal@recovery F·1
+18:17:18.112140 journal@recovery recovering @1
+18:17:18.113499 memdb@flush created L0@2 N·2 S·309B "i_m..ing,v2":"v,v1"
+18:17:18.117195 db@janitor F·3 G·0
+18:17:18.117226 db@open done T·8.073059ms
+18:17:18.119199 db@close closing
+18:17:18.119304 db@close done T·102.991µs
