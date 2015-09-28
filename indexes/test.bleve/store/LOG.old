@@ -1,10 +1,10 @@
-=============== Jul 6, 2015 (EDT) ===============
-18:17:18.107280 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-18:17:18.109131 db@open opening
-18:17:18.109232 journal@recovery F·1
-18:17:18.112140 journal@recovery recovering @1
-18:17:18.113499 memdb@flush created L0@2 N·2 S·309B "i_m..ing,v2":"v,v1"
-18:17:18.117195 db@janitor F·3 G·0
-18:17:18.117226 db@open done T·8.073059ms
-18:17:18.119199 db@close closing
-18:17:18.119304 db@close done T·102.991µs
+=============== Sep 28, 2015 (EDT) ===============
+15:32:32.490078 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:32:32.490363 db@open opening
+15:32:32.490409 journal@recovery F·1
+15:32:32.490615 journal@recovery recovering @1
+15:32:32.491610 memdb@flush created L0@2 N·2 S·309B "i_m..ing,v2":"v,v1"
+15:32:32.492763 db@janitor F·3 G·0
+15:32:32.492792 db@open done T·2.413756ms
+15:32:32.493878 db@close closing
+15:32:32.493970 db@close done T·90.284µs

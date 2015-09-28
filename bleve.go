@@ -1,5 +1,10 @@
 package main
 
+// recreate the sample index
+//go:generate rm -rf indexes/test.bleve
+//go:generate bleve_create -index indexes/test.bleve -store goleveldb
+//go:generate bleve_index -index indexes/test.bleve a.json
+
 import (
 	"io/ioutil"
 	"log"
@@ -7,6 +12,7 @@ import (
 	"os"
 
 	"github.com/blevesearch/bleve"
+	_ "github.com/blevesearch/bleve/config"
 	bleveHttp "github.com/blevesearch/bleve/http"
 	"github.com/gorilla/mux"
 )

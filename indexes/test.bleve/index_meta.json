@@ -1,1 +1,1 @@
-{"storage":"goleveldb"}
+{"storage":"goleveldb","index_type":"upside_down"}
