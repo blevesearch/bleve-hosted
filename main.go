@@ -13,7 +13,7 @@
 //go:generate bleve create indexes/test.bleve -s goleveldb
 //go:generate bleve index indexes/test.bleve a.json
 
-// +build !appengine
+// +build !appengine,!appenginevm
 
 package main
 
