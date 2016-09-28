@@ -8,7 +8,7 @@
 //  either express or implied. See the License for the specific language governing permissions
 //  and limitations under the License.
 
-// +build !appengine
+// +build appengine
 
 package main
 
@@ -19,14 +19,19 @@ import (
 	"os"
 
 	"github.com/blevesearch/bleve"
-	_ "github.com/blevesearch/bleve/config"
 	bleveHttp "github.com/blevesearch/bleve/http"
+	"github.com/blevesearch/bleve/index/store/gtreap"
+	"github.com/blevesearch/blevex/preload"
 	"github.com/gorilla/mux"
 )
 
 const indexDir = "indexes"
 
 func init() {
+
+	bleve.Config.DefaultKVStore = gtreap.Name
+
+	bleveHttp.SetLog(log.New(os.Stderr, "bleve.http ", log.LstdFlags))
 
 	router := mux.NewRouter()
 	router.StrictSlash(true)
@@ -55,15 +60,24 @@ func init() {
 	for _, dirInfo := range dirEntries {
 		indexPath := indexDir + string(os.PathSeparator) + dirInfo.Name()
 
-		if !dirInfo.IsDir() {
-			log.Printf("see file %s, this is not supported in the appengine environment", dirInfo.Name())
+		if dirInfo.IsDir() {
+			log.Printf("see directory %s, this is not supported in the appengine environment", dirInfo.Name())
 		} else {
-			i, err := bleve.OpenUsing(indexPath, map[string]interface{}{
-				"read_only": true,
-			})
+			log.Printf("preloading index export %s", dirInfo.Name())
+			// assume file in this dir is actually a bleve export
+			i, err := bleve.NewUsing(
+				"",
+				bleve.NewIndexMapping(),
+				bleve.Config.DefaultIndexType,
+				preload.Name,
+				map[string]interface{}{
+					"kvStoreName_actual": gtreap.Name,
+					"preloadpath":        indexPath,
+				})
 			if err != nil {
-				log.Printf("error opening index %s: %v", indexPath, err)
+				log.Printf("error preloading index %s: %v", indexPath, err)
 			} else {
+				i.SetName(dirInfo.Name())
 				log.Printf("registered index: %s", dirInfo.Name())
 				bleveHttp.RegisterIndexName(dirInfo.Name(), i)
 			}
